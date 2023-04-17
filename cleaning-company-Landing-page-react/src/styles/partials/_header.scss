@@ -1,0 +1,39 @@
+.header {
+  background-color: #fff;
+  color: #000;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 2rem;
+
+    .logo {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--main-color);
+    }
+
+    .navbar {
+      .navlist {
+        display: flex;
+        gap: 5rem;
+        align-items: center;
+
+        li {
+          a {
+            text-transform: uppercase;
+          }
+        }
+
+        & > a {
+          text-transform: uppercase;
+          color: var(--main-color);
+          padding: 0.5rem 2rem;
+          border: 2px solid var(--main-color);
+          border-radius: 5rem;
+        }
+      }
+    }
+  }
+}
