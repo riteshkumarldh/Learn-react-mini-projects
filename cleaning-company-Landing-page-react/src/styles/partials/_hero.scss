@@ -5,6 +5,10 @@
     grid-template-columns: 1fr 1fr;
     align-items: center;
 
+    @include media(992px) {
+      grid-template-columns: 1frs;
+    }
+
     .left {
       h1 {
         font-size: 5rem;

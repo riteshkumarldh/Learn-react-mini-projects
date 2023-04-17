@@ -1,0 +1,53 @@
+.services {
+  background: #f5f7fd;
+  padding-block: 80px;
+
+  .container {
+    h2 {
+      font-size: 3.9rem;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5rem;
+      margin-top: 80px;
+
+      @include media(992px) {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: 10rem;
+      }
+    }
+  }
+}
+
+.card {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 3rem 3rem;
+  text-align: center;
+
+  & > div {
+    width: 100px;
+    height: 100px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    position: relative;
+    top: -50px;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    word-spacing: 1.4px;
+  }
+}

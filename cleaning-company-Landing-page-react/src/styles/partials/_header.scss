@@ -20,6 +20,10 @@
         gap: 5rem;
         align-items: center;
 
+        @include media(992px) {
+          gap: 2rem;
+        }
+
         li {
           a {
             text-transform: uppercase;

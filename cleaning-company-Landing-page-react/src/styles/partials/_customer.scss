@@ -1,0 +1,30 @@
+.customers {
+  background: #fff;
+  color: #000;
+
+  .container {
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    @include media(992px) {
+      grid-template-columns: 1fr;
+    }
+
+    .left {
+      max-width: 500px;
+
+      p {
+        max-width: 450px;
+      }
+
+      button {
+        background-color: var(--main-color);
+        padding: 1rem 3rem;
+        color: white;
+        border-radius: 5rem;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
