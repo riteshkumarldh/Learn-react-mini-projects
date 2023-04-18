@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* :root {
+  --bg-color: #1f2023;
+  --accent-color: #e85d04;
+  --p-text: #717171;
+  --footer: #313235;
+} */
+
+@layer base {
+  body {
+    background-color: #1f2023;
+    color: white;
+  }
+}
+
+.active {
+  color: tomato;
+}
