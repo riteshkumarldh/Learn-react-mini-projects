@@ -1,4 +1,5 @@
 import { useRecipeContext } from "../context/RecipeContext";
+import SingleRecipeDetails from "../components/SingleRecipeDetails";
 
 const SingleRecipe = () => {
   const { singleRecipe, loading } = useRecipeContext();
@@ -23,23 +24,14 @@ const SingleRecipe = () => {
             </figure>
 
             <div>
-              <h2 className="text-3xl font-bold text-zinc-400 lg:text-4xl">
+              <h2 className="text-3xl font-bold text-zinc-400 lg:text-5xl">
                 {strMeal}
               </h2>
-              <div className="flex items-center gap-4 mt-5">
-                <span className="h-3 w-3 bg-orange-500 rounded-full block"></span>
-                <p className="text-md text-zinc-500 font-semibold">
-                  {strCategory}
-                </p>
-              </div>
-              <div className="flex items-center gap-4 mt-5">
-                <span className="h-3 w-3 bg-orange-500 rounded-full block"></span>
-                <p className="text-md text-zinc-500 font-semibold">{strArea}</p>
-              </div>
-              <div className="flex items-center gap-4 mt-5">
-                <span className="h-3 w-3 bg-orange-500 rounded-full block"></span>
-                <p className="text-md text-zinc-500 font-semibold">{strTags}</p>
-              </div>
+              <SingleRecipeDetails
+                strCategory={strCategory}
+                strArea={strArea}
+                strTags={strTags}
+              />
             </div>
           </div>
 
