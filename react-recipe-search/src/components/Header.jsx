@@ -21,7 +21,7 @@ const Header = () => {
   const [sidebar, setSidebar] = useState(false);
 
   return (
-    <header className="h-20 container mx-auto flex justify-between items-center px-4">
+    <header className="h-20 container mx-auto flex justify-between items-center px-8">
       <div>
         <Link to="/" className="text-3xl font-semibold">
           Recipe<span className="text-orange-500">Search</span>
@@ -29,11 +29,9 @@ const Header = () => {
       </div>
 
       <nav
-        className={
-          sidebar
-            ? "fixed top-0 left-0 bg-zinc-800 h-screen max-w-[300px] w-full transition-all"
-            : "left-[-300px] fixed top-0 bg-zinc-800 h-screen max-w-[300px] w-full transition-all"
-        }
+        className={`${
+          sidebar ? "left-0" : "left-[-300px]"
+        } fixed top-0 left-0 bg-zinc-800 z-20 h-screen max-w-[300px] w-full transition-all md:static md:h-auto md:bg-transparent`}
       >
         <button
           onClick={() => setSidebar(!sidebar)}
@@ -41,7 +39,7 @@ const Header = () => {
         >
           <i className="bx bx-x"></i>
         </button>
-        <ul className="mt-20 ml-5 flex flex-col gap-5 md:flex-row md:gap-3 md:mt-0 md:ml-0">
+        <ul className="mt-20 ml-5 flex flex-col gap-5 md:flex-row md:gap-12 lg:gap-20 md:mt-0 md:ml-0">
           {navLinks.map((navLink, index) => {
             return (
               <Navbar
