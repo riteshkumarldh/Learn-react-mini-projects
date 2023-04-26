@@ -49,7 +49,7 @@ const Login = () => {
           <h1 className="font-medium text-4xl mb-1">Welcome back !!</h1>
           <p className="text-sm font-normal">Login to Add your todos</p>
         </div>
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="h-10 relative my-5 rounded overflow-hidden">
             <input
               className="h-full pl-8 pr-2 placeholder:text-gray-400 w-full outline-none border border-blue-400 focus:border-2 rounded transition-all"
@@ -80,7 +80,6 @@ const Login = () => {
           <button
             type="submit"
             className="bg-blue-500 w-full mt-5 py-3 rounded-md text-blue-100 font-bold uppercase text-lg"
-            onClick={handleLogin}
           >
             Login
           </button>

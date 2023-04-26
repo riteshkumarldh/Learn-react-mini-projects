@@ -91,6 +91,7 @@ const FirebaseProvider = ({ children }) => {
         signinWithGoogle,
         isLoggedIn,
         loggingOut,
+        user,
       }}
     >
       {children}
