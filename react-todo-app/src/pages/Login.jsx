@@ -1,6 +1,31 @@
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import { useFirebase } from "../context/firebaseContext";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { signinWithEmailPassword, signinWithGoogle, isLoggedIn } =
+    useFirebase();
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (!email || !password) return;
+    // login
+    signinWithEmailPassword(email, password);
+    setEmail("");
+    setPassword("");
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate]);
+
   return (
     <section className="lg:grid lg:grid-cols-2 lg:gap-5">
       <div className="hidden lg:block bg-blue-200">
@@ -25,22 +50,13 @@ const Login = () => {
           <p className="text-sm font-normal">Login to Add your todos</p>
         </div>
         <form>
-          {/* <div className="h-10 relative rounded overflow-hidden">
-            <input
-              className="h-full w-full pl-8 pr-2 placeholder:text-gray-400 outline-none border border-blue-400 focus:border-2 rounded transition-all"
-              type="text"
-              placeholder="Full Name"
-            />
-
-            <button className="absolute top-1/2 -translate-y-1/2 left-2 opacity-50">
-              <i className="bx bxs-user"></i>
-            </button>
-          </div> */}
           <div className="h-10 relative my-5 rounded overflow-hidden">
             <input
               className="h-full pl-8 pr-2 placeholder:text-gray-400 w-full outline-none border border-blue-400 focus:border-2 rounded transition-all"
               type="email"
               placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
 
             <button className="absolute top-1/2 -translate-y-1/2 left-2 opacity-50">
@@ -52,6 +68,8 @@ const Login = () => {
               className="h-full pl-8 pr-2 placeholder:text-gray-400 w-full outline-none border border-blue-400 focus:border-2 rounded transition-all"
               type="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <button className="absolute top-1/2 -translate-y-1/2 left-2 opacity-50">
@@ -62,10 +80,19 @@ const Login = () => {
           <button
             type="submit"
             className="bg-blue-500 w-full mt-5 py-3 rounded-md text-blue-100 font-bold uppercase text-lg"
+            onClick={handleLogin}
           >
             Login
           </button>
         </form>
+
+        <p className="my-5 text-center uppercase font-bold">or</p>
+        <button
+          className=" bg-red-500 text-red-100 py-4 rounded-md font-medium uppercase"
+          onClick={() => signinWithGoogle()}
+        >
+          Signin With Google
+        </button>
 
         <div className="flex gap-2 justify-center mt-5">
           <p>New here then </p>
