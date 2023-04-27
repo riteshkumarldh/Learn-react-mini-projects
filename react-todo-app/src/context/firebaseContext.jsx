@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 // firebase imports
-import { auth, db } from "../firebase";
+import { auth } from "../firebase";
 // auth
 import {
   createUserWithEmailAndPassword,
@@ -16,62 +16,76 @@ import {
 // context
 export const FirebaseContext = createContext(null);
 
-// sign in with google
-const googleProvider = new GoogleAuthProvider();
-const signinWithGoogle = async () => {
-  try {
-    const res = await signInWithPopup(auth, googleProvider);
-
-    console.log(res);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-// signup
-const createUser = async (email, password, name) => {
-  try {
-    console.log("creating user...");
-    const newUser = await createUserWithEmailAndPassword(auth, email, password);
-    updateProfile(auth.currentUser, {
-      displayName: name,
-    });
-
-    console.log("Successfully created user", newUser);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-// signin with email and password
-const signinWithEmailPassword = async (email, password) => {
-  try {
-    console.log("Login start");
-    const res = await signInWithEmailAndPassword(auth, email, password);
-
-    console.log("successfully logged", res);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-// signOut
-const loggingOut = async () => {
-  try {
-    const res = await signOut(auth);
-
-    console.log("successfully signedout", res);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
 // provider
 const FirebaseProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // sign in with google
+  const googleProvider = new GoogleAuthProvider();
+  const signinWithGoogle = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // signup
+  const createUser = async (email, password, name) => {
+    try {
+      console.log("creating user...");
+      setLoading(true);
+      const newUser = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      updateProfile(auth.currentUser, {
+        displayName: name,
+      });
+      setLoading(false);
+      console.log("Successfully created user", newUser);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
+  // signin with email and password
+  const signinWithEmailPassword = async (email, password) => {
+    try {
+      console.log("Login start");
+      setLoading(true);
+      const res = await signInWithEmailAndPassword(auth, email, password);
+
+      console.log("successfully logged", res);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
+
+  // signOut
+  const loggingOut = async () => {
+    try {
+      setLoading(true);
+      await signOut(auth);
+
+      console.log("successfully signedout");
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
+  };
 
   // detecting user login or not
   useEffect(() => {
+    setLoading(true);
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
@@ -79,6 +93,7 @@ const FirebaseProvider = ({ children }) => {
         setUser(null);
       }
     });
+    setLoading(false);
   }, [user]);
 
   const isLoggedIn = user ? true : false;
@@ -92,6 +107,8 @@ const FirebaseProvider = ({ children }) => {
         isLoggedIn,
         loggingOut,
         user,
+        loading,
+        setLoading,
       }}
     >
       {children}
