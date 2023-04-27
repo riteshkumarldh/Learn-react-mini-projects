@@ -21,8 +21,32 @@ const Home = () => {
     e.preventDefault();
     if (!todoInput) return;
 
-    setTodos([...todos, { status: false, work: todoInput, id: Date.now() }]);
+    setTodos([
+      ...todos,
+      {
+        status: false,
+        work: todoInput,
+        id: Date.now(),
+      },
+    ]);
     setTododInput("");
+  };
+
+  const handleDelete = (id) => {
+    setTodos(
+      todos.filter((todo) => {
+        return todo.id !== id;
+      })
+    );
+  };
+
+  const handleEdit = (id) => {
+    todos.forEach((todo, i) => {
+      if (todo.id === id) {
+        // console.log(todos[i].work);
+        setTododInput(todos[i].work);
+      }
+    });
   };
 
   return (
@@ -55,16 +79,16 @@ const Home = () => {
                 className="flex justify-between px-2 py-2 hover:bg-blue-100 border"
               >
                 <div className="flex gap-2">
-                  <input type="checkbox" id={todo.id} />
+                  <input type="checkbox" id={todo.id} checked={todo.status} />
                   <label htmlFor={todo.id} className="text-base md:text-lg">
                     {todo.work}
                   </label>
                 </div>
                 <div className="flex gap-5">
-                  <button>
+                  <button onClick={() => handleEdit(todo.id)}>
                     <i className="bx bxs-edit text-yellow-500 text-lg"></i>
                   </button>
-                  <button>
+                  <button onClick={() => handleDelete(todo.id)}>
                     <i className="bx bx-trash text-red-600 text-lg"></i>
                   </button>
                 </div>
