@@ -65,7 +65,7 @@ import Button from "./Button";
 //   },
 // ];
 
-const ModalInfo = ({ handleOpenModal, edit }) => {
+const ModalInfo = ({ handleOpenModal, edit, setFormData, formData }) => {
   return (
     <div className="modal">
       <div className="modal-details">
@@ -75,7 +75,11 @@ const ModalInfo = ({ handleOpenModal, edit }) => {
         </div>
         <div className="form">
           <form>
-            <AddressForm handleOpenModal={handleOpenModal} />
+            <AddressForm
+              handleOpenModal={handleOpenModal}
+              setFormData={setFormData}
+              formData={formData}
+            />
           </form>
           <div className="btns">
             {edit ? (

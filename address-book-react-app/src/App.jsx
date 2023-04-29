@@ -1,13 +1,29 @@
+import { useState } from "react";
+
+// components imports
 import AddressTable from "./components/AddressTable";
 import Button from "./components/Button";
 import Header from "./components/Header";
-
-import "./App.css";
 import ModalInfo from "./components/ModalInfo";
-import { useState } from "react";
+
+// css file
+import "./App.css";
+
 function App() {
   const [openModal, setOpenModal] = useState(false);
   const [edit, setEdit] = useState(false);
+  const [formData, setFormData] = useState({
+    nickname: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    address: "",
+    postal: "",
+    city: "",
+    country: "",
+    labels: "",
+  });
 
   const handleOpenModal = () => {
     setOpenModal((prev) => !prev);
@@ -30,7 +46,12 @@ function App() {
         />
         <AddressTable openEditModal={openEditModal} />
         {openModal && (
-          <ModalInfo handleOpenModal={handleOpenModal} edit={edit} />
+          <ModalInfo
+            handleOpenModal={handleOpenModal}
+            edit={edit}
+            formData={formData}
+            setFormData={setFormData}
+          />
         )}
       </div>
     </>

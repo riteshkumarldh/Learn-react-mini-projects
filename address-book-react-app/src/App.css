@@ -203,10 +203,16 @@ form div:nth-child(10) {
 
 input,
 select {
-  border: 1px solid grey;
+  border: 1px solid rgba(0, 0, 0, 0.4);
   padding-inline: 0.5rem;
   height: 3.5rem;
   width: 100%;
+  border-radius: 0.4rem;
+}
+
+input::placeholder {
+  font-size: 1.3rem;
+  color: rgba(0, 0, 0, 0.4);
 }
 
 select {
@@ -219,6 +225,7 @@ option {
 
 label {
   display: block;
+  font-size: 1.3rem;
 }
 
 .btns {
